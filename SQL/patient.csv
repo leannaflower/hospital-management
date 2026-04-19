@@ -1,0 +1,6 @@
+patient_id,room_num,first_name,last_name,contact_info,gender,DOB,illness,time_admitted,status,insurance,insurance_num,height,weight
+100245,205,Mary,Johnson,5855550184,Female,2000-07-01 00:00:00,Heart issue,2026-04-13 09:15:00,Recovering,Aetna,INS778231,5.40,132.00
+100246,ER12,Daniel,Smith,5855550185,Male,1995-11-14 00:00:00,Broken arm,2026-04-13 10:20:00,Stable,BlueCross,INS778232,5.90,180.00
+100247,301,Nina,Patel,5855550186,Female,2003-02-20 00:00:00,Respiratory distress,2026-04-12 22:45:00,Critical,Cigna,INS778233,5.50,125.00
+100248,VIP14,Leo,Martinez,5855550187,Male,1988-09-03 00:00:00,Cancer treatment,2026-04-14 11:10:00,Stable,UnitedHealth,INS778234,5.80,170.00
+100249,210,Ava,Nguyen,5855550188,Female,2016-01-25 00:00:00,Fever,2026-04-14 14:05:00,Recovering,Aetna,INS778235,4.20,62.00

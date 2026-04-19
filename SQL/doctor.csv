@@ -1,0 +1,5 @@
+doctor_id,department_id,first_name,last_name,contact_num,shift_start,shift_end,is_on_shift,license_num
+D314,DEP01,Hailey,Gergonfosh,5855550140,2026-04-19 08:00:00,2026-04-19 16:00:00,1,LIC7781
+D118,DEP02,Daniel,Lee,5855550151,2026-04-19 07:00:00,2026-04-19 15:00:00,0,LIC6652
+D221,DEP03,Amira,Chen,5855550159,2026-04-19 09:00:00,2026-04-19 17:00:00,1,LIC8824
+D402,DEP04,Marcus,Hill,5855550162,2026-04-19 10:00:00,2026-04-19 18:00:00,1,LIC9901

@@ -1,0 +1,6 @@
+room_num,department_id,room_type,beds_count,is_filled,last_cleaned
+205,DEP01,Single,4,0,2026-04-12 18:20:00
+ER12,DEP02,Double,2,1,2026-04-13 06:45:00
+301,DEP03,Single,1,1,2026-04-13 06:45:00
+VIP14,DEP04,VIP,1,0,2026-04-12 20:10:00
+210,DEP05,Double,2,0,2026-04-12 17:30:00

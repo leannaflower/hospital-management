@@ -2,7 +2,7 @@
 LOAD DATA LOCAL INFILE 'department.csv'
 INTO TABLE DEPARTMENT
 FIELDS TERMINATED BY ','
-OPTIONALLY ENCLOSED B '"'
+OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (department_id, department_name, department_location, beds_total);
 
@@ -40,7 +40,7 @@ IGNORE 1 ROWS (patient_id, room_num, first_name, last_name, contact_info, gender
 
 -- Load IS_TREATING
 LOAD DATA LOCAL INFILE 'is_treating.csv'
-INTO TABLE PATIENT
+INTO TABLE IS_TREATING
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
