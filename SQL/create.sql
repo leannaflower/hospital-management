@@ -53,7 +53,7 @@ CREATE TABLE ROOM (
     department_id VARCHAR(20) NOT NULL,
     room_type VARCHAR(10),
     beds_count INT,
-    is_filled BOOLEAN,
+    occupied INT,
     last_cleaned DATETIME,
     FOREIGN KEY (department_id)
         REFERENCES DEPARTMENT(department_id)

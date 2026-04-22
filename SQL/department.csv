@@ -1,6 +1,6 @@
 department_id,department_name,department_location,beds_total
-DEP01,Cardiology,2,20
-DEP02,Emergency,1,14
-DEP03,ICU,3,9
-DEP04,Oncology,4,18
-DEP05,Pediatrics,2,12
+DEP01,Cardiology,2,4
+DEP02,Emergency,1,2
+DEP03,ICU,3,1
+DEP04,Oncology,4,1
+DEP05,Pediatrics,2,2

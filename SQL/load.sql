@@ -28,7 +28,7 @@ INTO TABLE ROOM
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
-IGNORE 1 ROWS (room_num, department_id, room_type, beds_count, is_filled, last_cleaned);
+IGNORE 1 ROWS (room_num, department_id, room_type, beds_count, occupied, last_cleaned);
 
 -- Load PATIENT
 LOAD DATA LOCAL INFILE 'patient.csv'
