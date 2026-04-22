@@ -41,7 +41,7 @@
     </section>
 
     <section class="form-card">
-      <form class="stack" data-demo-form="">
+      <form id="roomForm" class="stack">
         <div class="form-grid">
           <div>
             <label class="required" for="roomNum">Room Number</label>
@@ -50,10 +50,12 @@
           <div>
             <label class="required" for="roomDept">Department ID</label>
             <select id="roomDept" required>
-              <option value="">Select department</option>
-              <option>DEP01 • Cardiology</option>
-              <option>DEP02 • Emergency</option>
-              <option>DEP03 • ICU</option>
+  		<option value="">Select department</option>
+ 		<option value="DEP01">Cardiology</option>
+ 		<option value="DEP02">Emergency</option>
+  		<option value="DEP03">ICU</option>
+  		<option value="DEP04">Oncology</option>
+  		<option value="DEP05">Pediatrics</option>
             </select>
           </div>
           <div>
@@ -67,16 +69,13 @@
             </select>
           </div>
           <div>
-            <label class="required" for="bedCount">Bed Count</label>
-            <input id="bedCount" type="number" min="1" placeholder="4" required />
+            <label class="required" for="bedsCount">Bed Count</label>
+            <input id="bedsCount" type="number" min="1" placeholder="4" required />
           </div>
-          <div>
-            <label for="isFilled">Is Filled</label>
-            <select id="isFilled">
-              <option>No</option>
-              <option>Yes</option>
-            </select>
-          </div>
+	<div>
+  		<label for="occupied">Occupied Beds</label>
+  		<input id="occupied" type="number" min="0" placeholder="0" value="0" />
+	</div>
           <div>
             <label for="lastCleaned">Last Cleaned</label>
             <input id="lastCleaned" type="datetime-local" />

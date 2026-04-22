@@ -43,7 +43,7 @@
     </section>
 
     <section class="form-card">
-      <form class="stack" data-demo-form="">
+      <form id="admitForm" class="stack">
         <div class="form-grid">
           <div>
             <label class="required" for="patientFirstName">First Name</label>
@@ -76,23 +76,14 @@
           </div>
           <div>
             <label class="required" for="department">Department</label>
-            <select id="department" required>
+            <select id="patientDept" required>
               <option value="">Select department</option>
-              <option>Emergency</option>
-              <option>Cardiology</option>
-              <option>ICU</option>
-              <option>Oncology</option>
-              <option>Pediatrics</option>
             </select>
           </div>
           <div>
-            <label for="roomNumber">Room Number</label>
+            <label class="required" for="roomNumber">Room</label>
             <select id="roomNumber">
               <option value="">Choose available room</option>
-              <option>201</option>
-              <option>205</option>
-              <option>301</option>
-              <option>ER12</option>
             </select>
           </div>
           <div>

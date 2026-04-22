@@ -42,7 +42,7 @@
     </section>
 
     <section class="form-card">
-      <form class="stack" data-demo-form="">
+      <form id="nurseForm" class="stack">
         <div class="form-grid">
           <div>
             <label class="required" for="nurseId">Nurse ID</label>
@@ -66,12 +66,14 @@
           </div>
           <div>
             <label class="required" for="nurseDept">Department ID</label>
-            <select id="nurseDept" required>
-              <option value="">Select department</option>
-              <option>DEP01 • Cardiology</option>
-              <option>DEP02 • Emergency</option>
-              <option>DEP03 • ICU</option>
-            </select>
+	<select id="nurseDept" required>
+  		<option value="">Select department</option>
+ 		<option value="DEP01">Cardiology</option>
+ 		<option value="DEP02">Emergency</option>
+  		<option value="DEP03">ICU</option>
+  		<option value="DEP04">Oncology</option>
+  		<option value="DEP05">Pediatrics</option>
+	</select>
           </div>
           <div>
             <label for="nurseShiftStart">Shift Start</label>
