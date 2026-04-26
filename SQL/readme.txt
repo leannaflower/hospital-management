@@ -1,11 +1,3 @@
-Hospital Management Database
-CSC 261 Milestone 3
-Team 8
-
-Team Members:
-Leanna Fowler
-Oliver Luo
-
 This folder contains the SQL schema and sample data files for the Hospital Management Database project. The database includes the following relations:
 
 - DEPARTMENT

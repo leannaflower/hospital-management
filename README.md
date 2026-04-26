@@ -13,4 +13,10 @@ php -S localhost:8000
 mysql --local-infile=1 --load-data-local-dir="$PWD" -u USERNAME -p
 SOURCE load.sql
 
-Go to browser: "http://localhost:8000/Pages/index.html"
+Go to browser: "https://betaweb.csug.rochester.edu/~oluo/"
+
+### Project Organization:
+* Task B: Folders "Pages/", "Script/", "Style/", "PHP/"
+* Task C: Folder "SQL/" - includes create.sql, load.sql, and .csv files. 
+* Task D: "Task_D.txt"
+* 
