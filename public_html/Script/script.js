@@ -1,5 +1,11 @@
 
 document.addEventListener("DOMContentLoaded", async () => { // read query parameters from the url
+  const API_BASE = window.location.hostname === "localhost"
+    ? "PHP/"
+    : "/~oluo/PHP/";
+
+  const apiPath = (fileName) => `${API_BASE}${fileName}`;
+
   const params = new URLSearchParams(window.location.search);
 
   // helper to fetch JSON from a PHP endpoint
@@ -55,7 +61,7 @@ document.addEventListener("DOMContentLoaded", async () => { // read query parame
     if (!select) return;
 
     try {
-      const departments = await fetchJSON("/~oluo/PHP/department_api.php");
+      const departments = await fetchJSON(apiPath("department_api.php"));
       select.innerHTML = `<option value="">Select department</option>`;
 
       departments.forEach((d) => {
@@ -85,7 +91,7 @@ document.addEventListener("DOMContentLoaded", async () => { // read query parame
     }
 
     try {
-      const rooms = await fetchJSON("/~oluo/PHP/room_api.php");
+      const rooms = await fetchJSON(apiPath("room_api.php"));
       const filtered = rooms.filter((r) => {
         const sameDepartment = r.department_id === departmentId;
         const hasCapacity = Number(r.occupied) < Number(r.beds_count);
@@ -243,7 +249,7 @@ document.addEventListener("DOMContentLoaded", async () => { // read query parame
 
   const getSession = async () => {
     try {
-      const res = await fetch("/~oluo/PHP/session_api.php", {
+      const res = await fetch(apiPath("session_api.php"), {
         credentials: "same-origin"
       });
 
@@ -352,7 +358,7 @@ document.addEventListener("DOMContentLoaded", async () => { // read query parame
       }
 
       try {
-        const res = await fetch("/~oluo/PHP/login_api.php", {
+        const res = await fetch(apiPath("login_api.php"), {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -381,7 +387,7 @@ document.addEventListener("DOMContentLoaded", async () => { // read query parame
         event.preventDefault();
 
         try {
-          await fetch("/~oluo/PHP/logout_api.php", {
+          await fetch(apiPath("logout_api.php"), {
             method: "POST",
             credentials: "same-origin"
           });
@@ -403,13 +409,58 @@ document.addEventListener("DOMContentLoaded", async () => { // read query parame
   updateNavForRole(session);
   setupLogout();
 
+  const loadAdminDashboard = async () => {
+    const dashboardTable = document.getElementById("departmentStatsBody");
 
+    if (!dashboardTable) return;
+
+    try {
+      const data = await fetchJSON(apiPath("admin_dashboard_api.php"));
+
+      if (!data.success) {
+        throw new Error(data.error || "Could not load dashboard data.");
+      }
+
+      document.getElementById("totalPatients").textContent = data.summary.total_patients;
+      document.getElementById("bedsFilled").textContent = data.summary.beds_filled;
+      document.getElementById("bedsAvailable").textContent = data.summary.beds_available;
+      document.getElementById("totalDoctors").textContent = data.summary.total_doctors;
+
+      let html = "";
+
+      data.departments.forEach((d) => {
+        html += `
+        <tr>
+          <td>${escapeHtml(d.department_name)}</td>
+          <td>${escapeHtml(d.patient_count)}</td>
+          <td>${escapeHtml(d.open_beds)}</td>
+        </tr>
+      `;
+      });
+
+      dashboardTable.innerHTML = html || `
+      <tr>
+        <td colspan="3">No department data found.</td>
+      </tr>
+    `;
+    } catch (err) {
+      console.error("Admin dashboard load error:", err);
+
+      dashboardTable.innerHTML = `
+      <tr>
+        <td colspan="3">Unable to load dashboard data.</td>
+      </tr>
+    `;
+    }
+  };
+
+  await loadAdminDashboard();
 
   // --------------
   // TABLE LOADING SECTIONS: fetch data from PHP endpoints and populate the tables
 
   // load doctors into the doctor table (doctor_api)
-  fetch("/~oluo/PHP/doctor_api.php")
+  fetch(apiPath("doctor_api.php"))
     .then((res) => res.json())
     .then((data) => {
       let html = "";
@@ -437,7 +488,7 @@ document.addEventListener("DOMContentLoaded", async () => { // read query parame
     .catch((err) => console.error("Doctor load error:", err));
 
   // load nurses into the nurse table (nurse_api)
-  fetch("/~oluo/PHP/nurse_api.php")
+  fetch(apiPath("nurse_api.php"))
     .then((res) => res.json())
     .then((data) => {
       let html = "";
@@ -465,7 +516,7 @@ document.addEventListener("DOMContentLoaded", async () => { // read query parame
     .catch((err) => console.error("Nurse load error:", err));
 
   // load patients into the patient table (patient_api)
-  fetch("/~oluo/PHP/patient_api.php")
+  fetch(apiPath("patient_api.php"))
     .then((res) => res.json())
     .then((data) => {
       let html = "";
@@ -501,7 +552,7 @@ document.addEventListener("DOMContentLoaded", async () => { // read query parame
     .catch((err) => console.error("Patient load error:", err));
 
   // load departments into the department table (department_api)
-  fetch("/~oluo/PHP/department_api.php")
+  fetch(apiPath("department_api.php"))
     .then((res) => res.json())
     .then((data) => {
       let html = "";
@@ -529,7 +580,7 @@ document.addEventListener("DOMContentLoaded", async () => { // read query parame
     .catch((err) => console.error("Department load error:", err));
 
   // load rooms into the room table (room_api)
-  fetch("/~oluo/PHP/room_api.php")
+  fetch(apiPath("room_api.php"))
     .then((res) => res.json())
     .then((data) => {
       let html = "";
@@ -598,7 +649,7 @@ document.addEventListener("DOMContentLoaded", async () => { // read query parame
       }
 
       try {
-        const res = await fetch("/~oluo/PHP/patientadmit_api.php", {
+        const res = await fetch(apiPath("patientadmit_api.php"), {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -629,7 +680,7 @@ document.addEventListener("DOMContentLoaded", async () => { // read query parame
     // If doctor_id exists in the URL, this page is in edit mode.
     // Load all doctors, find the matching one, and prefill the form.
     if (doctorIdParam) {
-      fetchJSON("/~oluo/PHP/doctor_api.php")
+      fetchJSON(apiPath("doctor_api.php"))
         .then((data) => {
           const doctor = data.find((d) => d.doctor_id === doctorIdParam);
           if (!doctor) return;
@@ -673,7 +724,7 @@ document.addEventListener("DOMContentLoaded", async () => { // read query parame
       }
 
       try {
-        const res = await fetch("/~oluo/PHP/doctoradd_api.php", {
+        const res = await fetch(apiPath("doctoradd_api.php"), {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -702,7 +753,7 @@ document.addEventListener("DOMContentLoaded", async () => { // read query parame
     const nurseIdParam = params.get("nurse_id");
 
     if (nurseIdParam) {
-      fetchJSON("/~oluo/PHP/nurse_api.php")
+      fetchJSON(apiPath("nurse_api.php"))
         .then((data) => {
           const nurse = data.find((n) => n.nurse_id === nurseIdParam);
           if (!nurse) return;
@@ -746,7 +797,7 @@ document.addEventListener("DOMContentLoaded", async () => { // read query parame
       }
 
       try {
-        const res = await fetch("/~oluo/PHP/nurseadd_api.php", {
+        const res = await fetch(apiPath("nurseadd_api.php"), {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -775,7 +826,7 @@ document.addEventListener("DOMContentLoaded", async () => { // read query parame
     const departmentIdParam = params.get("department_id");
 
     if (departmentIdParam) {
-      fetchJSON("/~oluo/PHP/department_api.php")
+      fetchJSON(apiPath("department_api.php"))
         .then((data) => {
           const department = data.find((d) => d.department_id === departmentIdParam);
           if (!department) return;
@@ -810,7 +861,7 @@ document.addEventListener("DOMContentLoaded", async () => { // read query parame
       }
 
       try {
-        const res = await fetch("/~oluo/PHP/departmentadd_api.php", {
+        const res = await fetch(apiPath("departmentadd_api.php"), {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -839,7 +890,7 @@ document.addEventListener("DOMContentLoaded", async () => { // read query parame
     const roomNumParam = params.get("room_num");
 
     if (roomNumParam) {
-      fetchJSON("/~oluo/PHP/room_api.php")
+      fetchJSON(apiPath("room_api.php"))
         .then((data) => {
           const room = data.find((r) => r.room_num === roomNumParam);
           if (!room) return;
@@ -875,7 +926,7 @@ document.addEventListener("DOMContentLoaded", async () => { // read query parame
       }
 
       try {
-        const res = await fetch("/~oluo/PHP/roomadd_api.php", {
+        const res = await fetch(apiPath("roomadd_api.php"), {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -933,7 +984,7 @@ document.addEventListener("DOMContentLoaded", async () => { // read query parame
       }
 
       try {
-        const patients = await fetchJSON("/~oluo/PHP/patient_api.php");
+        const patients = await fetchJSON(apiPath("patient_api.php"));
         const patient = patients.find((p) => String(p.patient_id) === String(patientIdParam));
 
         if (!patient) {
@@ -1006,7 +1057,7 @@ document.addEventListener("DOMContentLoaded", async () => { // read query parame
         }
 
         try {
-          const res = await fetch("/~oluo/PHP/patientupdate_api.php", {
+          const res = await fetch(apiPath("patientupdate_api.php"), {
             method: "POST",
             headers: {
               "Content-Type": "application/json"

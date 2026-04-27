@@ -1,4 +1,4 @@
-Available users:
+Available users: (USERNAME, PASSWORD, ROLE)
     -> ('admin01', 'admin261', 'Admin'),
     -> ('D101', 'doctor261', 'Doctor'),
     -> ('D102', 'doctor262', 'Doctor'),
