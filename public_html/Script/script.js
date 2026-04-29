@@ -158,67 +158,67 @@ document.addEventListener("DOMContentLoaded", async () => { // read query parame
     timeField.value = local;
   }
 
-  // reports page preview logic here:
-  const reportSelect = document.getElementById("reportPreset");
-  const reportOutput = document.getElementById("reportOutput");
-  if (reportSelect && reportOutput) {
-    const reportSamples = {
-      rooms: `
-        <table>
-          <thead>
-            <tr><th>Department</th><th>Available Rooms</th><th>Open Beds</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Cardiology</td><td>5</td><td>8</td></tr>
-            <tr><td>Emergency</td><td>2</td><td>3</td></tr>
-            <tr><td>ICU</td><td>1</td><td>1</td></tr>
-          </tbody>
-        </table>`,
-      admitted: `
-        <table>
-          <thead>
-            <tr><th>Department</th><th>Patients Admitted</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Cardiology</td><td>16</td></tr>
-            <tr><td>Emergency</td><td>11</td></tr>
-            <tr><td>Pediatrics</td><td>9</td></tr>
-          </tbody>
-        </table>`,
-      occupancy: `
-        <table>
-          <thead>
-            <tr><th>Room Type</th><th>Total Rooms</th><th>Occupied</th><th>Occupancy Rate</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Standard</td><td>20</td><td>14</td><td>70%</td></tr>
-            <tr><td>ICU</td><td>6</td><td>5</td><td>83%</td></tr>
-            <tr><td>VIP</td><td>4</td><td>2</td><td>50%</td></tr>
-          </tbody>
-        </table>`,
-      patientcount: `
-        <table>
-          <thead>
-            <tr><th>Department</th><th>Patient Count</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Cardiology</td><td>16</td></tr>
-            <tr><td>Oncology</td><td>12</td></tr>
-            <tr><td>Emergency</td><td>11</td></tr>
-          </tbody>
-        </table>`
-    };
+  // REPORTS PAGE preview logic here:
+  // const reportSelect = document.getElementById("reportPreset");
+  // const reportOutput = document.getElementById("reportOutput");
+  // if (reportSelect && reportOutput) {
+  //   const reportSamples = {
+  //     rooms: `
+  //       <table>
+  //         <thead>
+  //           <tr><th>Department</th><th>Available Rooms</th><th>Open Beds</th></tr>
+  //         </thead>
+  //         <tbody>
+  //           <tr><td>Cardiology</td><td>5</td><td>8</td></tr>
+  //           <tr><td>Emergency</td><td>2</td><td>3</td></tr>
+  //           <tr><td>ICU</td><td>1</td><td>1</td></tr>
+  //         </tbody>
+  //       </table>`,
+  //     admitted: `
+  //       <table>
+  //         <thead>
+  //           <tr><th>Department</th><th>Patients Admitted</th></tr>
+  //         </thead>
+  //         <tbody>
+  //           <tr><td>Cardiology</td><td>16</td></tr>
+  //           <tr><td>Emergency</td><td>11</td></tr>
+  //           <tr><td>Pediatrics</td><td>9</td></tr>
+  //         </tbody>
+  //       </table>`,
+  //     occupancy: `
+  //       <table>
+  //         <thead>
+  //           <tr><th>Room Type</th><th>Total Rooms</th><th>Occupied</th><th>Occupancy Rate</th></tr>
+  //         </thead>
+  //         <tbody>
+  //           <tr><td>Standard</td><td>20</td><td>14</td><td>70%</td></tr>
+  //           <tr><td>ICU</td><td>6</td><td>5</td><td>83%</td></tr>
+  //           <tr><td>VIP</td><td>4</td><td>2</td><td>50%</td></tr>
+  //         </tbody>
+  //       </table>`,
+  //     patientcount: `
+  //       <table>
+  //         <thead>
+  //           <tr><th>Department</th><th>Patient Count</th></tr>
+  //         </thead>
+  //         <tbody>
+  //           <tr><td>Cardiology</td><td>16</td></tr>
+  //           <tr><td>Oncology</td><td>12</td></tr>
+  //           <tr><td>Emergency</td><td>11</td></tr>
+  //         </tbody>
+  //       </table>`
+  //   };
 
-    const renderReport = () => {
-      const key = reportSelect.value;
-      reportOutput.innerHTML =
-        reportSamples[key] ||
-        '<div class="empty-state">Select a preset report to preview the output table.</div>';
-    };
+  //   const renderReport = () => {
+  //     const key = reportSelect.value;
+  //     reportOutput.innerHTML =
+  //       reportSamples[key] ||
+  //       '<div class="empty-state">Select a preset report to preview the output table.</div>';
+  //   };
 
-    reportSelect.addEventListener("change", renderReport);
-    renderReport();
-  }
+  //   reportSelect.addEventListener("change", renderReport);
+  //   renderReport();
+  // }
 
   // LOGIN FORM BEHAVIOUR
   const ROLE_HOME = {
@@ -237,7 +237,7 @@ document.addEventListener("DOMContentLoaded", async () => { // read query parame
     "add_room.html": ["Admin"],
     "departments_management.html": ["Admin"],
     "add_department.html": ["Admin"],
-    "reports.html": ["Admin"],
+    // "reports.html": ["Admin"],
     "patient_lookup.html": ["Admin", "Doctor", "Nurse"],
     "patient_details.html": ["Admin", "Doctor", "Nurse"],
     "admit_patient.html": ["Admin", "Doctor"]
@@ -309,7 +309,7 @@ document.addEventListener("DOMContentLoaded", async () => { // read query parame
     const isDoctor = role === "Doctor";
 
     toggleDisplay(
-      'a[href="staff_management.html"], a[href="add_doctor.html"], a[href="add_nurse.html"], a[href="room_management.html"], a[href="add_room.html"], a[href="departments_management.html"], a[href="add_department.html"], a[href="reports.html"], a[href="admin_dashboard.html"]',
+      'a[href="staff_management.html"], a[href="add_doctor.html"], a[href="add_nurse.html"], a[href="room_management.html"], a[href="add_room.html"], a[href="departments_management.html"], a[href="add_department.html"], a[href="admin_dashboard.html"]',
       isAdmin
     );
 
